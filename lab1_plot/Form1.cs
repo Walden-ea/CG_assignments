@@ -59,16 +59,16 @@ namespace lab1_plot
             return new Tuple<List<double>, List<double>>(args, vals);
         }
 
-        double SqueezingFactor(List<double> values) // фактор раскукоживания (с) Василиса Дельгато
+        /*double SqueezingFactor(List<double> values) // фактор раскукоживания (с) Василиса Дельгато
         {
             return pictureBox1.Height / (values.Max() - values.Min());
-        }
+        }*/
 
         void Plot(List<double> values, double factor = 1)
         {
             Graphics g = Graphics.FromImage(picture);
             g.Clear(Color.White);
-            double sh = pictureBox1.Height / 2;
+            //double sh = pictureBox1.Height / 2;
             if (fitIn)
             {
                 //factor = (pictureBox1.Height - 1) / (values.Max() - values.Min());// SqueezingFactor(values);
