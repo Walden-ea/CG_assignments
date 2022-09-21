@@ -29,16 +29,24 @@ namespace lab1_plot
             pictureBox1.Image = picture;
 
             delta  = (b - a) / pictureBox1.Width;
-            fitIn = true;
+            fitIn = false;
 
-            Draw();
+            Draw(Func());
         }
 
-        Func<double, double> mathf = x => Math.Sin(Math.Abs(x/2))+x*x/40;
+        Func<double, double> sinx = x => Math.Sin(x);
+        Func<double, double> xsquare = x => x*x;
 
-        void Draw()
+        Func<double,double> Func()
         {
-            Plot(CalcValues(mathf, a, b).Item2);
+            if (comboBox1.SelectedIndex == 0)
+                return sinx;
+            else return xsquare;
+        }
+
+        void Draw(Func<double, double> func)
+        {
+            Plot(CalcValues(func, a, b).Item2);
         }
 
         Tuple<List<double>,List<double>> CalcValues(Func<double,double> func, double a, double b)
@@ -113,7 +121,7 @@ namespace lab1_plot
         private void button1_Click(object sender, EventArgs e)
         {
             fitIn = !fitIn;
-            Draw();
+            Draw(Func());
             pictureBox1.Refresh();
             if (fitIn)
             {
@@ -123,6 +131,12 @@ namespace lab1_plot
             {
                 button1.Text = "раскукожить";
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw(Func());
+            pictureBox1.Refresh();
         }
     }
 }
